@@ -36,4 +36,23 @@ public class MainActivity extends AppCompatActivity {
 
         frameLayout.addView(mGLPreviewSurface);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mGLPreviewSurface.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mGLPreviewSurface.onResume();
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        mCamera.release();
+        mCamera = null;
+    }
 }

@@ -34,7 +34,6 @@ public class GLPreviewSurface extends GLSurfaceView {
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         super.surfaceDestroyed(holder);
-        mCamera.release();
     }
 
     @Override
