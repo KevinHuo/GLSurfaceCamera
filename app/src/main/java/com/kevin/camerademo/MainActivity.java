@@ -6,6 +6,7 @@ import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +25,10 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+        init();
+    }
 
+    public void init(){
         FrameLayout frameLayout = (FrameLayout) findViewById(R.id.PreviewFrameLayout);
 
         mCamera = Utils.getCameraInstance();
@@ -38,21 +42,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (mPermissionChecker.verifyPermissions(grantResults)){
+            init();
+        }else {
+            Toast.makeText(this,"请开启权限",Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+
+    @Override
     protected void onPause() {
         super.onPause();
-        mGLPreviewSurface.onPause();
+        if (mGLPreviewSurface != null){
+            mGLPreviewSurface.onPause();
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mGLPreviewSurface.onResume();
+        if (mGLPreviewSurface != null){
+            mGLPreviewSurface.onResume();
+        }
     }
 
     @Override
     protected void onDestroy(){
         super.onDestroy();
-        mCamera.release();
-        mCamera = null;
+        if (mCamera != null) {
+            mCamera.release();
+            mCamera = null;
+        }
     }
 }

@@ -26,7 +26,7 @@ public class PermissionChecker {
      *
      * @see Activity#onRequestPermissionsResult(int, String[], int[])
      */
-    private boolean verifyPermissions(int[] grantResults) {
+    public boolean verifyPermissions(int[] grantResults) {
         // At least one result must be checked.
         if (grantResults.length < 1){
             return false;
@@ -50,12 +50,12 @@ public class PermissionChecker {
         if (!addPermission(permissionsList, Manifest.permission.CAMERA)) {
             permissionsNeeded.add("CAMERA");
         }
-        if (!addPermission(permissionsList, Manifest.permission.RECORD_AUDIO)) {
-            permissionsNeeded.add("MICROPHONE");
-        }
-        if (!addPermission(permissionsList, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            permissionsNeeded.add("Write external storage");
-        }
+//        if (!addPermission(permissionsList, Manifest.permission.RECORD_AUDIO)) {
+//            permissionsNeeded.add("MICROPHONE");
+//        }
+//        if (!addPermission(permissionsList, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+//            permissionsNeeded.add("Write external storage");
+//        }
 
         if (permissionsNeeded.size() > 0) {
             // Need Rationale
